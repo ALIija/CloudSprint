@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home_page.css' %}" />
+{% endblock extra_css %}
+
+{% block content %}
+<div class="home-page">
+  {% if page.content %}
+    {% for block in page.content %}
+      
+      {% if block.block_type == 'hero_section' %}
+        <div class="hero-block">
+          <h1>{{ block.value.title }}</h1>
+          <p>{{ block.value.subtitle }}</p>
+          {% if block.value.button_text %}
+            <a href="{{ block.value.button_url }}" class="cta-button">
+              {{ block.value.button_text }}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+ 
+      {% if block.block_type == 'rich_text' %}
+        <div class="rich-text-block">{{ block.value|richtext }}</div>
+      {% endif %}
+ 
+      {% if block.block_type == 'image' %}
+        <div class="image-block">{% image block.value.image max-800x600 %}</div>
+      {% endif %}
+ 
+      {% if block.block_type == 'features' %}
+        <div class="features-block">
+          <h2>Features</h2>
+          <div class="features-grid">
+            {% for feature in block.value.features %}
+              <div class="feature-item">
+                <h3>{{ feature.title }}</h3>
+                <p>{{ feature.description }}</p>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+ 
+      {% if block.block_type == 'testimonials' %}
+        <div class="testimonials-block">
+          <h2>Testimonials</h2>
+          <div class="testimonials-grid">
+            {% for testimonial in block.value.testimonials %}
+              <div class="testimonial-item">
+                <blockquote>{{ testimonial.text }}</blockquote>
+                <cite>{{ testimonial.name }}</cite>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+ 
+      {% if block.block_type == 'contact_form' %}
+        <div class="contact-form-block">
+          <h2>{{ block.value.title }}</h2>
+          <form class="contact-form">
+            <input type="text" placeholder="Name" required />
+            <input type="email" placeholder="Email" required />
+            <textarea placeholder="Message" required></textarea>
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      {% endif %}
+ 
+    {% endfor %}
+  {% else %}
+    <!-- Empty State - when there's no content -->
+    <section class="empty-state">
+      <div class="container">
+        <div class="empty-content">
+          <h1>Welcome to your site!</h1>
+          <p>This is your homepage. To add content:</p>
+          <ol>
+            <li>Go to the <a href="/admin/">admin panel</a></li>
+            <li>Find the "Home" page</li>
+            <li>Add content via the StreamField</li>
+            <li>Save your changes</li>
+          </ol>
+          <div class="cta-buttons">
+            <a href="/admin/" class="cta-button primary">Open Admin Panel</a>
+            <a href="/admin/pages/" class="cta-button secondary">Manage Pages</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+</div>
+{% endblock content %}

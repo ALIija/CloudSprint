@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # Main application container (All-in-One)
+  app:
+    build: .
+    ports:
+      - "8000:80"
+    environment:
+      - DJANGO_SETTINGS_MODULE=landing_page_cms.settings.development
+      - DJANGO_SECRET_KEY=dev-secret-key-change-in-production
+      - ALLOWED_HOSTS=localhost,127.0.0.1
+      - DB_NAME=landing_page_cms
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+      - AWS_ACCESS_KEY_ID=dummy
+      - AWS_SECRET_ACCESS_KEY=dummy
+      - AWS_STORAGE_BUCKET_NAME=wagtail-media
+      - AWS_S3_REGION_NAME=us-east-1
+      - CELERY_BROKER_URL=memory://
+      - CELERY_RESULT_BACKEND=rpc://
+    volumes:
+      - .:/app
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+    depends_on:
+      - db
+    networks:
+      - cms_network
+    restart: unless-stopped
+
+  # PostgreSQL database (Aurora Serverless v2 equivalent for local dev)
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=landing_page_cms
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - cms_network
+    restart: unless-stopped
+
+  # Redis for production Celery (optional for local dev)
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - cms_network
+    restart: unless-stopped
+
+  # Local S3 equivalent (MinIO)
+  minio:
+    image: minio/minio:latest
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+    networks:
+      - cms_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
+  minio_data:
+
+networks:
+  cms_network:
+    driver: bridge
