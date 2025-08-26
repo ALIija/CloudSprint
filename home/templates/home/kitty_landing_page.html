@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-kitty-landing{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/landing_page_cms.css' %}" />
+{% endblock extra_css %}
+
+{% block content %}
+<div class="kitty-landing-page">
+  <!-- Hero Section -->
+  <section class="hero-block">
+    <div class="hero-content">
+      <h1>🐱 Welcome to Kitty Corner! 🐱</h1>
+      <p>Your purr-fect destination for all things feline! Discover adorable cats, helpful tips, and heartwarming stories.</p>
+      <a href="#featured-cats" class="cta-button">Meet Our Cats</a>
+    </div>
+  </section>
+
+  <!-- Featured Cats Section -->
+  <section id="featured-cats" class="rich-text-block">
+    <h2>🌟 Featured Feline Friends</h2>
+    <p>Meet some of the most adorable and charming cats that brighten our days!</p>
+  </section>
+
+  <!-- Cat Gallery -->
+  <section class="image-block">
+    <h3>📸 Cat Photo Gallery</h3>
+    <div class="cat-gallery">
+      <div class="cat-card">
+        <div class="cat-image">
+          <img src="{% static 'images/luna-cat.jpg' %}" alt="Luna - The Night Explorer" class="cat-photo">
+          <h4>Luna - The Night Explorer</h4>
+        </div>
+        <p>This beautiful black cat loves midnight adventures and cuddles.</p>
+      </div>
+      <div class="cat-card">
+        <div class="cat-image">
+          <img src="{% static 'images/whiskers-cat.jpg' %}" alt="Whiskers - The Gentle Giant" class="cat-photo">
+          <h4>Whiskers - The Gentle Giant</h4>
+        </div>
+        <p>A fluffy orange tabby who's as sweet as he is large.</p>
+      </div>
+      <div class="cat-card">
+        <div class="cat-image">
+          <img src="{% static 'images/mittens-cat.jpg' %}" alt="Mittens - The Playful One" class="cat-photo">
+          <h4>Mittens - The Playful One</h4>
+        </div>
+        <p>Always ready for a game of chase with her favorite toys.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cat Care Tips -->
+  <section class="features-block">
+    <h2>💡 Essential Cat Care Tips</h2>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">🍽️</div>
+        <h3>Proper Nutrition</h3>
+        <p>Feed your cat high-quality food with the right balance of proteins, fats, and vitamins. Always provide fresh water!</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🏠</div>
+        <h3>Safe Environment</h3>
+        <p>Create a cat-friendly space with scratching posts, cozy beds, and plenty of hiding spots for your feline friend.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">💊</div>
+        <h3>Regular Vet Visits</h3>
+        <p>Schedule annual check-ups and keep vaccinations up to date to ensure your cat stays healthy and happy.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🧸</div>
+        <h3>Play & Exercise</h3>
+        <p>Engage your cat with interactive toys and play sessions to keep them mentally and physically stimulated.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cat Stories -->
+  <section class="testimonials-block">
+    <h2>📖 Heartwarming Cat Stories</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-item">
+        <div class="testimonial-avatar">
+          <img src="{% static 'images/sarah-avatar.jpg' %}" alt="Sarah" class="avatar">
+        </div>
+        <blockquote>"When I adopted Luna, she was shy and scared. Now she's the most loving companion who greets me at the door every day!"</blockquote>
+        <cite>Sarah M. - Cat Mom</cite>
+      </div>
+      <div class="testimonial-item">
+        <div class="testimonial-avatar">
+          <img src="{% static 'images/mike-avatar.jpg' %}" alt="Mike" class="avatar">
+        </div>
+        <blockquote>"Whiskers helped me through a difficult time. His gentle purring and warm presence brought so much comfort to my life."</blockquote>
+        <cite>Mike R. - Cat Dad</cite>
+      </div>
+      <div class="testimonial-item">
+        <div class="testimonial-avatar">
+          <img src="{% static 'images/emma-avatar.jpg' %}" alt="Emma" class="avatar">
+        </div>
+        <blockquote>"Mittens is the most playful cat I've ever met! She brings endless joy and laughter to our household."</blockquote>
+        <cite>Emma L. - Cat Enthusiast</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cat Blog Section -->
+  <section class="rich-text-block">
+    <h2>📝 Latest from Our Cat Blog</h2>
+    <div class="blog-preview">
+      <article class="blog-post">
+        <h3>🐾 "Understanding Your Cat's Body Language"</h3>
+        <p>Cats communicate through subtle body movements. Learn to read the signs - from tail position to ear movements, discover what your cat is really saying!</p>
+        <a href="#" class="read-more">Read More →</a>
+      </article>
+      <article class="blog-post">
+        <h3>🏠 "Creating the Perfect Cat-Friendly Home"</h3>
+        <p>Transform your living space into a paradise for your feline friend. From vertical spaces to cozy nooks, make your home a cat's dream come true!</p>
+        <a href="#" class="read-more">Read More →</a>
+      </article>
+      <article class="blog-post">
+        <h3>🍽️ "Homemade Cat Treats: Recipes Your Cat Will Love"</h3>
+        <p>Whip up delicious and healthy treats in your own kitchen! Simple recipes that will make your cat purr with delight.</p>
+        <a href="#" class="read-more">Read More →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-form-block">
+    <h2>🐱 Join Our Cat Community!</h2>
+    <p>Share your cat stories, ask questions, or just say hello! We'd love to hear from fellow cat lovers.</p>
+    <form class="contact-form">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Tell us about your cat or ask a question!" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Fun Facts Section -->
+  <section class="rich-text-block">
+    <h2>🤓 Fun Cat Facts</h2>
+    <div class="facts-grid">
+      <div class="fact-item">
+        <h4>🐾 Cats spend 70% of their lives sleeping</h4>
+        <p>That's 13-16 hours a day! No wonder they're so energetic when they're awake.</p>
+      </div>
+      <div class="fact-item">
+        <h4>👅 Cats have sandpaper tongues</h4>
+        <p>Their tongues are covered in tiny spines called papillae that help them groom and eat.</p>
+      </div>
+      <div class="fact-item">
+        <h4>🏃‍♂️ Cats can run up to 30 mph</h4>
+        <p>They're incredibly fast runners, especially when chasing toys or laser pointers!</p>
+      </div>
+      <div class="fact-item">
+        <h4>🎵 Cats have over 20 muscles in each ear</h4>
+        <p>This allows them to rotate their ears 180 degrees to hear sounds from all directions.</p>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock content %}
