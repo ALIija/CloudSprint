@@ -34,7 +34,7 @@ jobs:
         env:
           REGISTRY:   ${{ steps.ecr.outputs.registry }}
           REPOSITORY: ${{ vars.ECR_REPOSITORY }}
-          TAG:        ${{ github.sha }}
+          TAG:        latest
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$TAG -f container/Dockerfile .
           docker push $REGISTRY/$REPOSITORY:$TAG
